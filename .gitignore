@@ -1,0 +1,27 @@
+# Pastas e arquivos do Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+
+# Pastas de build
+Debug/
+Release/
+x64/
+x86/
+
+# Arquivos temporários
+*.obj
+*.exe
+*.log
+*.tmp
+*.pch
+*.idb
+*.ipch
+*.tlog
+*.lastbuildstate
+
+# Outros arquivos desnecessários
+*.suo
+*.ncb
+*.opendb
+*.cache
