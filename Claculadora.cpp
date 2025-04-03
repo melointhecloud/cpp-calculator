@@ -1,9 +1,10 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cmath>
 #include <vector>
 #include <string>
 #include <iomanip>
 #include <locale>
+#include <stdexcept> // Para exceções padrão
 
 using namespace std;
 
@@ -25,7 +26,7 @@ double calcularRaizQuadrada(double numero)
 {
     if (numero < 0)
     {
-        throw "Erro: Não é possível calcular raiz quadrada de número negativo!";
+        throw runtime_error("Erro: Não é possível calcular raiz quadrada de número negativo!");
     }
     return sqrt(numero);
 }
@@ -38,13 +39,13 @@ double calcularPorcentagem(double numero, double percentual)
 void mostrarMenu()
 {
     cout << "\n====== Calculadora em C++ ========" << endl;
-    cout << "1. Operações básicas (+, -, *, /)" << endl;
-    cout << "2. Potenciação" << endl;
-    cout << "3. Raiz Quadrada" << endl;
-    cout << "4. Porcentagem" << endl;
-    cout << "5. Ver histórico" << endl;
-    cout << "6. Limpar histórico" << endl;
-    cout << "0. Sair" << endl;
+    cout << "1. Operações básicas (+, -, *, /)." << endl;
+    cout << "2. Potenciação." << endl;
+    cout << "3. Raiz Quadrada." << endl;
+    cout << "4. Porcentagem." << endl;
+    cout << "5. Ver histórico." << endl;
+    cout << "6. Limpar histórico." << endl;
+    cout << "0. Sair." << endl;
     cout << "Escolha uma opção: ";
     cout << "\n==================================" << endl;
 }
@@ -63,6 +64,13 @@ int main()
 
         try
         {
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("Entrada inválida! Por favor, insira um número.");
+            }
+
             Calculo calc;
 
             switch (opcao)
@@ -70,12 +78,14 @@ int main()
             case 1: {
                 cout << "Digite o primeiro número: ";
                 cin >> calc.numero1;
+                if (cin.fail()) throw runtime_error("Entrada inválida!");
 
                 cout << "Digite o operador (+, -, *, /): ";
                 cin >> calc.operador;
 
                 cout << "Digite o segundo número: ";
                 cin >> calc.numero2;
+                if (cin.fail()) throw runtime_error("Entrada inválida!");
 
                 switch (calc.operador)
                 {
@@ -92,12 +102,12 @@ int main()
                     calc.descricao = "Multiplicação";
                     break;
                 case '/':
-                    if (calc.numero2 == 0) throw "Erro: Divisão por zero não é permitida!";
+                    if (calc.numero2 == 0) throw runtime_error("Erro: Divisão por zero não é permitida!");
                     calc.resultado = calc.numero1 / calc.numero2;
                     calc.descricao = "Divisão";
                     break;
                 default:
-                    throw "Operador inválido!";
+                    throw runtime_error("Operador inválido!");
                 }
                 historico.push_back(calc);
                 cout << "Resultado: " << fixed << setprecision(2) << calc.resultado << endl;
@@ -190,9 +200,9 @@ int main()
                 cout << "Opção inválida! Por favor, escolha uma opção válida." << endl;
             }
         }
-        catch (const char* erro)
+        catch (const runtime_error& erro)
         {
-            cout << erro << endl;
+            cout << erro.what() << endl;
         }
         catch (...)
         {
