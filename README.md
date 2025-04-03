@@ -1,2 +1,2 @@
 # cpp-calculator
-Calculator in cpp, with some advanced functions, such as viewing history
+Calculator in C++, with some advanced functions, such as exponentiation, square root, percentage and viewing history.
