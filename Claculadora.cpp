@@ -37,7 +37,7 @@ double calcularPorcentagem(double numero, double percentual)
 
 void mostrarMenu()
 {
-    cout << "\n=== Calculadora Avançada ===" << endl;
+    cout << "\n====== Calculadora em C++ ========" << endl;
     cout << "1. Operações básicas (+, -, *, /)" << endl;
     cout << "2. Potenciação" << endl;
     cout << "3. Raiz Quadrada" << endl;
@@ -46,6 +46,7 @@ void mostrarMenu()
     cout << "6. Limpar histórico" << endl;
     cout << "0. Sair" << endl;
     cout << "Escolha uma opção: ";
+    cout << "\n==================================" << endl;
 }
 
 int main()
